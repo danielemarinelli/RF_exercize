@@ -4,8 +4,9 @@ Library    SeleniumLibrary
 
 
 *** Variables ***
-${user_name}    dmarinel
+${user_name}    rahulshettyacademy
 ${wrong_pw}    myPass123
+${valid_pw}    learning
 ${URL}        http://www.rahulshettyacademy.com/loginpagePractise/
 
 *** Keywords ***

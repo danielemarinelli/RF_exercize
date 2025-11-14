@@ -8,26 +8,36 @@ Resource    resource.robot
 
 *** Variables ***
 ${Error_Message_Displayed}        css:.alert-danger
-
+${Shop_page_Loaded}               css:.my-4
 
 *** Test Cases ***
 #Customize keywords in the test cases
 Validate UnSuccessful Login
     
-    fill the login form
-    wait until it checks and display error message
+    fill the login form    ${user_name}    ${wrong_pw}
+    Be patient waiting till the element is visible    ${Error_Message_Displayed}
     verify error message is correct
+
+Validate Cards display in the Shopping page
+    fill the login form    ${user_name}    ${valid_pw}
+    Be patient waiting till the element is visible    ${Shop_page_Loaded}
+
 
 *** Keywords ***
 #Here insert the selenium library keywords needed
 
 fill the login form
-    Input Text        id:username    ${user_name}
-    Input Password    id:password    ${wrong_pw}
+    [Arguments]    ${user}    ${password}
+    Input Text        id:username    ${user}
+    Input Password    id:password    ${password}
     Click Button      id:signInBtn
 
-wait until it checks and display error message
-    Wait Until Element Is Visible    ${Error_Message_Displayed}
+#wait until it checks and display error message
+#    Wait Until Element Is Visible    ${Error_Message_Displayed}
+
+Be patient waiting till the element is visible
+    [Arguments]    ${element}
+    Wait Until Element Is Visible    ${element}
 
 verify error message is correct
     ${msg_display} =     Get Text    ${Error_Message_Displayed}
@@ -35,4 +45,4 @@ verify error message is correct
     #the two lines above can be wrapped in this single line below:
     Element Text Should Be    ${Error_Message_Displayed}    Incorrect username/password.
     
-    
+
