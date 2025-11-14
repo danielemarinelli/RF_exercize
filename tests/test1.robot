@@ -21,7 +21,7 @@ Validate UnSuccessful Login
 Validate Cards display in the Shopping page
     fill the login form    ${user_name}    ${valid_pw}
     Be patient waiting till the element is visible    ${Shop_page_Loaded}
-
+    Verify all the products displayed in the shopping page
 
 *** Keywords ***
 #Here insert the selenium library keywords needed
@@ -45,4 +45,12 @@ verify error message is correct
     #the two lines above can be wrapped in this single line below:
     Element Text Should Be    ${Error_Message_Displayed}    Incorrect username/password.
     
+Verify all the products displayed in the shopping page
+    # the below keyword (create list) comes from Build-In library
+    @{expected_list}=    Create List    iphone X    Samsung 8    Nokia Edge    Blackberry
+    ${web_elements}=    Get Webelements    css:.card-title
+    FOR    ${we}    IN    @{web_elements}
+        Log    ${we.text}    # print in the output log.html file
+    END
+
 
