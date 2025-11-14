@@ -1,10 +1,7 @@
 *** Settings ***
 Documentation    To validate the Login form
 Library    SeleniumLibrary
-Test Setup       open the browser with the payment url     # similar to @BeforeTest
-Test Teardown    Close Browser webpage session             # similar to @AfterTest
-Resource    resource.robot
-
+Test Teardown    Close Browser
 
 *** Variables ***
 ${Error_Message_Displayed}        css:.alert-danger
@@ -13,17 +10,20 @@ ${Error_Message_Displayed}        css:.alert-danger
 *** Test Cases ***
 #Customize keywords in the test cases
 Validate UnSuccessful Login
-    
+    open the browser with the payment url
     fill the login form
     wait until it checks and display error message
     verify error message is correct
 
 *** Keywords ***
 #Here insert the selenium library keywords needed
+open the browser with the payment url
+    Create Webdriver    Chrome
+    Go To    http://www.rahulshettyacademy.com/loginpagePractise/
 
 fill the login form
-    Input Text        id:username    ${user_name}
-    Input Password    id:password    ${wrong_pw}
+    Input Text        id:username    dmarinel
+    Input Password    id:password    myPass123
     Click Button      id:signInBtn
 
 wait until it checks and display error message
@@ -34,5 +34,5 @@ verify error message is correct
     Should Be Equal As Strings    ${msg_display}    Incorrect username/password.
     #the two lines above can be wrapped in this single line below:
     Element Text Should Be    ${Error_Message_Displayed}    Incorrect username/password.
-    
-    
+
+
