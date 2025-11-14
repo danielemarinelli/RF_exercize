@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation    To validate the Login form
 Library    SeleniumLibrary
-Test Teardown
+Test Teardown    Close Browser
 
 *** Variables ***
 ${Error_Message_Displayed}        css:.alert-danger
@@ -32,3 +32,7 @@ wait until it checks and display error message
 verify error message is correct
     ${msg_display} =     Get Text    ${Error_Message_Displayed}
     Should Be Equal As Strings    ${msg_display}    Incorrect username/password.
+    #the two lines above can be wrapped in this single line below:
+    Element Text Should Be    ${Error_Message_Displayed}    Incorrect username/password.
+    
+    
