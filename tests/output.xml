@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.3 on win32)" generated="2025-11-14T15:15:39.581359" rpa="false" schemaversion="5">
+<suite id="s1" name="Test1" source="C:\Users\dmarinel\API\PythonProject\PythonProject\tests\test1.robot">
+<test id="s1-t1" name="Validate UnSuccessful Login" line="9">
+<kw name="open the browser with the payment url">
+<kw name="Create Webdriver" owner="SeleniumLibrary">
+<msg time="2025-11-14T15:15:40.000575" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<arg>Chrome</arg>
+<doc>Creates an instance of Selenium WebDriver.</doc>
+<status status="PASS" start="2025-11-14T15:15:40.000433" elapsed="2.454579"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-11-14T15:15:42.455833" level="INFO">Opening url 'http://www.rahulshettyacademy.com/loginpagePractise/'</msg>
+<arg>http://www.rahulshettyacademy.com/loginpagePractise/</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-11-14T15:15:42.455614" elapsed="1.173118"/>
+</kw>
+<status status="PASS" start="2025-11-14T15:15:39.999872" elapsed="3.629047"/>
+</kw>
+<kw name="fill the login form">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-11-14T15:15:43.631433" level="INFO">Typing text 'dmarinel' into text field 'id:username'.</msg>
+<arg>id:username</arg>
+<arg>dmarinel</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-14T15:15:43.630739" elapsed="0.139944"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-11-14T15:15:43.771460" level="INFO">Typing password into text field 'id:password'.</msg>
+<msg time="2025-11-14T15:15:43.807023" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id:password</arg>
+<arg>myPass123</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-14T15:15:43.771137" elapsed="0.079846"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-11-14T15:15:43.851451" level="INFO">Clicking button 'id:signInBtn'.</msg>
+<arg>id:signInBtn</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-14T15:15:43.851214" elapsed="0.078281"/>
+</kw>
+<status status="PASS" start="2025-11-14T15:15:43.630296" elapsed="0.299332"/>
+</kw>
+<kw name="wait until it checks and display error message">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css:.alert-danger</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-11-14T15:15:43.930250" elapsed="2.191922"/>
+</kw>
+<status status="PASS" start="2025-11-14T15:15:43.929966" elapsed="2.192349"/>
+</kw>
+<kw name="verify error message is correct">
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2025-11-14T15:15:46.144418" level="INFO">${msg_display} = Incorrect username/password.</msg>
+<var>${msg_display}</var>
+<arg>css:.alert-danger</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-14T15:15:46.123253" elapsed="0.021243"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${msg_display}</arg>
+<arg>Incorrect username/password.</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-11-14T15:15:46.144768" elapsed="0.000309"/>
+</kw>
+<status status="PASS" start="2025-11-14T15:15:46.122831" elapsed="0.022329"/>
+</kw>
+<status status="PASS" start="2025-11-14T15:15:39.999000" elapsed="6.146604"/>
+</test>
+<doc>To validate the Login form</doc>
+<status status="PASS" start="2025-11-14T15:15:39.584195" elapsed="6.562336"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Test1" id="s1" pass="1" fail="0" skip="0">Test1</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
