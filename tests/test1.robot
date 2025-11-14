@@ -1,6 +1,7 @@
 *** Settings ***
 Documentation    To validate the Login form
 Library    SeleniumLibrary
+Library           Collections
 Test Setup       open the browser with the payment url     # similar to @BeforeTest
 Test Teardown    Close Browser webpage session             # similar to @AfterTest
 Resource    resource.robot
@@ -47,10 +48,18 @@ verify error message is correct
     
 Verify all the products displayed in the shopping page
     # the below keyword (create list) comes from Build-In library
-    @{expected_list}=    Create List    iphone X    Samsung 8    Nokia Edge    Blackberry
+    # when creating a list for first time use @{} symbol
+    @{expected_list}=    Create List    iphone X    Samsung Note 8    Nokia Edge    Blackberry
     ${web_elements}=    Get Webelements    css:.card-title
+    @{actual_list}=    Create List    #creates an empty list
+    
     FOR    ${we}    IN    @{web_elements}
         Log    ${we.text}    # print in the output log.html file
+        # the below keyword (append to list) comes from Collection library
+        Append To List    ${actual_list}    ${we.text}
     END
+
+    #compare the two lists, keyword from Collection library
+    Lists Should Be Equal    ${actual_list}    ${expected_list}
 
 
