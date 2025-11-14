@@ -3,6 +3,9 @@ Documentation    To validate the Login form
 Library    SeleniumLibrary
 Test Teardown
 
+*** Variables ***
+${Error_Message_Displayed}        css:.alert-danger
+
 
 *** Test Cases ***
 #Customize keywords in the test cases
@@ -24,8 +27,8 @@ fill the login form
     Click Button      id:signInBtn    
 
 wait until it checks and display error message
-    Wait Until Element Is Visible    css:.alert-danger
+    Wait Until Element Is Visible    ${Error_Message_Displayed}
 
 verify error message is correct
-    ${msg_display} =     Get Text    css:.alert-danger
+    ${msg_display} =     Get Text    ${Error_Message_Displayed}
     Should Be Equal As Strings    ${msg_display}    Incorrect username/password.
