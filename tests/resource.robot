@@ -14,6 +14,7 @@ ${URL}        http://www.rahulshettyacademy.com/loginpagePractise/
 open the browser with the payment url
     Create Webdriver    Chrome
     Go To    ${URL}
+    Maximize Browser Window
 
 Close Browser webpage session
     Close Browser

@@ -10,20 +10,26 @@ Resource    resource.robot
 *** Variables ***
 ${Error_Message_Displayed}        css:.alert-danger
 ${Shop_page_Loaded}               css:.my-4
+${User_radioButton}               xpath:(//span[@class='checkmark'])[2]
 
 *** Test Cases ***
 #Customize keywords in the test cases
-Validate UnSuccessful Login
+TC001_Validate UnSuccessful Login
     
     fill the login form    ${user_name}    ${wrong_pw}
     Be patient waiting till the element is visible    ${Error_Message_Displayed}
     verify error message is correct
 
-Validate Cards display in the Shopping page
+TC002_Validate Cards display in the Shopping page
     fill the login form    ${user_name}    ${valid_pw}
     Be patient waiting till the element is visible    ${Shop_page_Loaded}
     Verify all the products displayed in the shopping page
     Select a product from the web page    Blackberry
+
+TC003_Select the Form and navigate to child window
+    Fill the login details and login form    ${user_name}    ${valid_pw}
+
+
 
 *** Keywords ***
 #Here insert the selenium library keywords needed
@@ -74,4 +80,20 @@ Select a product from the web page
     END
     Click Button    xpath:(//div[@class='card-footer'])[${index}]/button
 
+Fill the login details and login form
+    [Arguments]    ${user}    ${password}
+    Input Text        id:username    ${user}
+    Input Password    id:password    ${password}
+    # how to handle radio buttons (keyword in SeleniumLibrary)
+    Click Element    ${User_radioButton}
+    Wait Until Element Is Visible    okayBtn   # inserted only the id of element to locate, without 'id:' in front (with ID it's allowed)
+    Click Button    css:#okayBtn
+    Wait Until Element Is Not Visible    okayBtn
+    # how to handle drop downs (keyword in SeleniumLibrary)
+    Select From List By Label    css:.form-group select    Teacher
+    # how to handle checkbox  (keyword in SeleniumLibrary)
+    Select Checkbox    css:#terms
+    Checkbox Should Be Selected    terms   #word terms -> is the ID
 
+
+    
