@@ -23,6 +23,7 @@ Validate Cards display in the Shopping page
     fill the login form    ${user_name}    ${valid_pw}
     Be patient waiting till the element is visible    ${Shop_page_Loaded}
     Verify all the products displayed in the shopping page
+    Select a product from the web page    Blackberry
 
 *** Keywords ***
 #Here insert the selenium library keywords needed
@@ -61,5 +62,16 @@ Verify all the products displayed in the shopping page
 
     #compare the two lists, keyword from Collection library
     Lists Should Be Equal    ${actual_list}    ${expected_list}
+
+Select a product from the web page
+    [Arguments]    ${productName}
+    ${web_elements}=    Get Webelements    css:.card-title
+    ${index}=    Set Variable    1
+    FOR    ${we}    IN    @{web_elements}
+        #iterating the products to find the name I selected
+         Exit For Loop If    '${productName}' == '${we.text}'
+            ${index}=    Evaluate    ${index}+1
+    END
+    Click Button    xpath:(//div[@class='card-footer'])[${index}]/button
 
 
