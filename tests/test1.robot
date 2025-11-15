@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation    To validate the Login form
+Documentation    To validate the Login form and Select a product
 Library    SeleniumLibrary
 Library           Collections
 Test Setup       open the browser with the payment url     # similar to @BeforeTest
@@ -94,6 +94,6 @@ Fill the login details and login form
     # how to handle checkbox  (keyword in SeleniumLibrary)
     Select Checkbox    css:#terms
     Checkbox Should Be Selected    terms   #word terms -> is the ID
-
+    Sleep    3
 
     
