@@ -1,0 +1,5 @@
+*** Test Cases ***,${user},${password}
+Invalid UserName,dmarinel,learning
+Invalid Password,rahulshettyacademy,badpwss
+Special Characters,@?}%$},learning
+,1234,9870
