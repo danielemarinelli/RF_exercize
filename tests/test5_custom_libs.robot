@@ -13,6 +13,11 @@ Library    ../customLibrary/Shop.py
 ${Error_Message_Displayed}        css:.alert-danger
 ${Shop_page_Loaded}               css:.my-4
 ${User_radioButton}               xpath:(//span[@class='checkmark'])[2]
+# creating one list variable:
+@{listOfProducts}                 Blackberry    Nokia Edge
+
+
+
 
 *** Test Cases ***
 #Customize keywords in the test cases
@@ -27,7 +32,10 @@ TC002_Validate Cards display in the Shopping page
     Be patient waiting till the element is visible    ${Shop_page_Loaded}
     Verify all the products displayed in the shopping page
     Example Custom Keyword Hello World
-    Select a product from the web page    Blackberry
+    #we want to select more products, not only Blackberry, so let's create a customize keywork with a list of products as argument
+    #Select a product from the web page    Blackberry
+    Add Items To Cart And Checkout        ${listOfProducts}
+    Sleep    5
 
 TC003_Select the Form and navigate to child window
     Fill the login details and login form    ${user_name}    ${valid_pw}
@@ -35,7 +43,7 @@ TC003_Select the Form and navigate to child window
 
 
 *** Keywords ***
-#Here insert the selenium library keywords needed
+
 
 fill the login form
     [Arguments]    ${user}    ${password}
@@ -43,8 +51,7 @@ fill the login form
     Input Password    id:password    ${password}
     Click Button      id:signInBtn
 
-#wait until it checks and display error message
-#    Wait Until Element Is Visible    ${Error_Message_Displayed}
+
 
 Be patient waiting till the element is visible
     [Arguments]    ${element}
@@ -53,23 +60,21 @@ Be patient waiting till the element is visible
 verify error message is correct
     ${msg_display} =     Get Text    ${Error_Message_Displayed}
     Should Be Equal As Strings    ${msg_display}    Incorrect username/password.
-    #the two lines above can be wrapped in this single line below:
+
     Element Text Should Be    ${Error_Message_Displayed}    Incorrect username/password.
     
 Verify all the products displayed in the shopping page
-    # the below keyword (create list) comes from Build-In library
-    # when creating a list for first time use @{} symbol
+
     @{expected_list}=    Create List    iphone X    Samsung Note 8    Nokia Edge    Blackberry
     ${web_elements}=    Get Webelements    css:.card-title
     @{actual_list}=    Create List    #creates an empty list
     
     FOR    ${we}    IN    @{web_elements}
-        Log    ${we.text}    # print in the output log.html file
-        # the below keyword (append to list) comes from Collection library
+        Log    ${we.text}
         Append To List    ${actual_list}    ${we.text}
     END
 
-    #compare the two lists, keyword from Collection library
+
     Lists Should Be Equal    ${actual_list}    ${expected_list}
 
 Select a product from the web page
@@ -77,7 +82,7 @@ Select a product from the web page
     ${web_elements}=    Get Webelements    css:.card-title
     ${index}=    Set Variable    1
     FOR    ${we}    IN    @{web_elements}
-        #iterating the products to find the name I selected
+
          Exit For Loop If    '${productName}' == '${we.text}'
             ${index}=    Evaluate    ${index}+1
     END
@@ -87,16 +92,16 @@ Fill the login details and login form
     [Arguments]    ${user}    ${password}
     Input Text        id:username    ${user}
     Input Password    id:password    ${password}
-    # how to handle radio buttons (keyword in SeleniumLibrary)
+
     Click Element    ${User_radioButton}
-    Wait Until Element Is Visible    okayBtn   # inserted only the id of element to locate, without 'id:' in front (with ID it's allowed)
+    Wait Until Element Is Visible    okayBtn
     Click Button    css:#okayBtn
     Wait Until Element Is Not Visible    okayBtn
-    # how to handle drop downs (keyword in SeleniumLibrary)
+
     Select From List By Label    css:.form-group select    Teacher
-    # how to handle checkbox  (keyword in SeleniumLibrary)
+
     Select Checkbox    css:#terms
-    Checkbox Should Be Selected    terms   #word terms -> is the ID
+    Checkbox Should Be Selected    terms
     Sleep    3
 
     
