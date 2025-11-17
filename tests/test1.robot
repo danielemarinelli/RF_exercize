@@ -4,7 +4,7 @@ Library    SeleniumLibrary
 Library           Collections
 Test Setup       open the browser with the payment url     # similar to @BeforeTest
 Test Teardown    Close Browser webpage session             # similar to @AfterTest
-Resource    resource.robot
+Resource    TestBase.robot
 
 
 *** Variables ***

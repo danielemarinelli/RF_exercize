@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation    A resource file with reusable keywords and variables
+Documentation    A resource file with reusable keywords and variables common with all TCs
 Library    SeleniumLibrary
 
 
@@ -18,3 +18,6 @@ open the browser with the payment url
 
 Close Browser webpage session
     Close Browser
+
+
+
