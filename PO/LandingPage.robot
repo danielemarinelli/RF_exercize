@@ -1,6 +1,8 @@
 *** Settings ***
 Documentation    All the pages objects and keywords of landing page
 Library    SeleniumLibrary
+Resource    TestBase.robot
+
 
 *** Variables ***
 ${Error_Message_Displayed}        css:.alert-danger
@@ -14,7 +16,7 @@ fill the login form
     Click Button      id:signInBtn
 
 Be patient waiting till the element is visible
-    Wait Until Element Is Visible    ${Error_Message_Displayed}
+    Wait until element passed is displayed in the page        ${Error_Message_Displayed}
 
 
 verify error message is correct

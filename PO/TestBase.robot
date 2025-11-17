@@ -19,5 +19,8 @@ open the browser with the payment url
 Close Browser webpage session
     Close Browser
 
-
-
+# different pages call the same logic, so only one implementation avoiding duplicates
+Wait until element passed is displayed in the page
+    [Arguments]    ${page_locator}
+    Wait Until Element Is Visible    ${page_locator}
+    

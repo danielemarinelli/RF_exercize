@@ -2,6 +2,8 @@
 Documentation      All the pages objects and keywords of landing page
 Library            SeleniumLibrary
 Library            Collections
+Resource           TestBase.robot
+
 
 *** Variables ***
 ${Shop_page_Loaded}               css:.my-4
@@ -9,7 +11,7 @@ ${Shop_page_Loaded}               css:.my-4
 *** Keywords ***
 
 Be patient waiting till the element is visible
-    Wait Until Element Is Visible    ${Shop_page_Loaded}
+    Wait until element passed is displayed in the page        ${Shop_page_Loaded}
 
 
 Verify all the products displayed in the shopping page

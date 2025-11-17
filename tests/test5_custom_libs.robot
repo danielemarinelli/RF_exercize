@@ -30,8 +30,6 @@ TC002_Validate Cards display in the Shopping page
     ShopPage.Be patient waiting till the element is visible
     ShopPage.Verify all the products displayed in the shopping page
     Example Custom Keyword Hello World
-    #we want to select more products, not only Blackberry, so let's create a customize keywork with a list of products as argument
-    #Select a product from the web page    Blackberry
     Add Items To Cart And Checkout        ${listOfProducts}
     Sleep    5
 
