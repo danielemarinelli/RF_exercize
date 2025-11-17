@@ -32,4 +32,5 @@ class Shop:
                 self.seleniumLib.click_button("xpath:(//div[@class='card-footer'])["+str(i)+"]/button")
             i = i + 1
 
-
+        #click on the checkout button after selecting the items
+        self.seleniumLib.click_link("css:li.active a")
