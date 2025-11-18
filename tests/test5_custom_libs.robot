@@ -9,6 +9,7 @@ Resource    ../PO/TestBase.robot
 Library    ../customLibrary/Shop.py
 Resource    ../PO/LandingPage.robot
 Resource    ../PO/ShopPage.robot
+Resource    ../PO/CheckoutPage.robot
 
 *** Variables ***
 
@@ -31,7 +32,8 @@ TC002_Validate Cards display in the Shopping page
     ShopPage.Verify all the products displayed in the shopping page
     Example Custom Keyword Hello World
     Add Items To Cart And Checkout        ${listOfProducts}
-    Sleep    5
+    CheckoutPage.Verify items in the checkout page and proceed
+
 
 TC003_Select the Form and navigate to child window
     LandingPage.Fill the login details and login form    ${user_name}    ${valid_pw}
