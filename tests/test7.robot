@@ -27,11 +27,17 @@ Add book into library database
 #aisle:227,
 #author:John foe,
 #}
-    &{payload_body}=    Create Dictionary    name=RobotFramework    isbn=59993    aisle=01102    author=Dan Brown
-    POST    ${BaseURL}/Library/Addbook.php    json=${payload_body}    expected_status=200
-
-
-
+    &{payload_body}=    Create Dictionary    name=RobotFrameworkVol1    isbn=59591    aisle=01102    author=Dan Brown
+    ${response}=    POST    ${BaseURL}/Library/Addbook.php    json=${payload_body}    expected_status=200
+    Log    ${response.json()}
+    Dictionary Should Contain Key    ${response.json()}    ID
+    ${book_ID}=    Get From Dictionary    ${response.json()}    ID
+    Log    ${book_ID}
+    ${msg}=    Get From Dictionary    ${response.json()}    Msg
+    Should Be Equal    ${msg}    successfully added
+    #same validation in one row:
+    Should Be Equal As Strings    ${response.json()}[Msg]    successfully added
+    Status Should Be    200    ${response}
 
 
 
