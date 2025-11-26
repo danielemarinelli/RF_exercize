@@ -10,12 +10,14 @@ Library    ../customLibrary/Shop.py
 Resource    ../PO/LandingPage.robot
 Resource    ../PO/ShopPage.robot
 Resource    ../PO/CheckoutPage.robot
+Resource    ../PO/ConfirmationPage.robot
 
 *** Variables ***
 
 ${User_radioButton}               xpath:(//span[@class='checkmark'])[2]
 # creating one list variable:
 @{listOfProducts}                 Blackberry    Nokia Edge
+${country_name}             Italy
 
 
 *** Test Cases ***
@@ -33,6 +35,8 @@ TC002_Validate Cards display in the Shopping page
     Example Custom Keyword Hello World
     Add Items To Cart And Checkout        ${listOfProducts}
     CheckoutPage.Verify items in the checkout page and proceed
+    ConfirmationPage.Enter the Country and select the terms      ${country_name}
+    ConfirmationPage.Purchase the Product and Confirm the Purchase
 
 
 TC003_Select the Form and navigate to child window
